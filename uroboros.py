@@ -97,7 +97,7 @@ def create_uroboros(graph, mode, max_iter, freqs):
         size = len(graph)
         freqs = get_freqs(graph, mode)
         skip = collect_skip(graph, freqs, sort_by)
-        for word, _ in sorted(freqs.iteritems(), key=sort_by):
+        for word, _ in sorted(freqs.iteritems(), key=lambda x: (sort_by, x[0])):
             new_def = graph[word].copy()
             for def_w in graph[word]:
                 if def_w in skip:
@@ -191,7 +191,7 @@ def main():
     if args.definitions == "stdin":
         def_graph = read_definition_graph(stdin, all_needed, needed_wds, args.filename)
     else:
-        def_graph = read_definition_graph(args.definitions, all_needed, 
+        def_graph = read_definition_graph(open(args.definitions), all_needed, 
                                           needed_wds, args.filename)
     logging.info('Definition graph read')
     correct_integrity(def_graph, args.error_fn)
