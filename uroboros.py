@@ -59,7 +59,7 @@ def get_augmented_graph(graph, needed_wds, fn):
 def augment_needed(needed_graph, graph, iternum, prev_missing, new_needed, fn):
     if len(prev_missing) == 0:
         f = open('{0}.augmented'.format(fn), 'w')
-        f.write('\n'.join(list(new_needed)))
+        f.write(u'\n'.join(list(new_needed)).encode('utf-8'))
         logging.info('Missing headwords inserted')
         return needed_graph
     missing = set([])
