@@ -97,7 +97,7 @@ def create_uroboros(graph, mode, max_iter, freqs):
         size = len(graph)
         freqs = get_freqs(graph, mode)
         skip = collect_skip(graph, freqs, sort_by)
-        for word, _ in sorted(freqs.iteritems(), key=lambda x: (sort_by, x[0])):
+        for word, freq in sorted(freqs.iteritems(), key=lambda x: (sort_by(x), x[0])):
             new_def = graph[word].copy()
             for def_w in graph[word]:
                 if def_w in skip:
