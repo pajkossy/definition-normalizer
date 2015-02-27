@@ -191,8 +191,10 @@ def main():
     if args.definitions == "stdin":
         def_graph = read_definition_graph(stdin, all_needed, needed_wds, args.filename)
     else:
-        def_graph = read_definition_graph(open(args.definitions), all_needed, 
+        def_fh = open(args.definitions)
+        def_graph = read_definition_graph(def_fh, all_needed, 
                                           needed_wds, args.filename)
+        def_fh.close()
     logging.info('Definition graph read')
     correct_integrity(def_graph, args.error_fn)
     logging.info('Definition integrity corrected')
